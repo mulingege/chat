@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>聊天</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 登录界面 -->
+        <div class="login-screen" id="loginScreen">
+            <div class="avatar-selection">
+                <div class="login-avatar" onclick="login('GG')">
+                    <img src="/images/GG.png" alt="头像1">
+                </div>
+                <div class="login-avatar" onclick="login('MM')">
+                    <img src="/images/MM.png" alt="头像2">
+                </div>
+            </div>
+        </div>
+
+        <!-- 聊天界面 -->
+        <div class="chat-screen hidden" id="chatScreen">
+            <!-- 顶部模块 -->
+            <div class="top-module">
+                <div class="top-bar">
+                    <div class="left-section">
+                        <select id="language" class="language-select" onchange="changeLanguage()">
+                            <option value="zh">🇨🇳</option>
+                            <option value="vi">🇻🇳</option>
+                        </select>
+                    </div>
+                    <div class="center-section">
+                        <div class="users-section">
+                            <div class="user-avatar">
+                                <img src="/images/GG.png" alt="GG" class="avatar-img" id="ggAvatar">
+                                <span class="status-dot offline" id="ggStatus"></span>
+                                <span class="status-text" id="ggStatusText">离线</span>
+                                <div class="typing-container">
+                                    <div class="typing-indicator" id="ggTyping"></div>
+                                </div>
+                            </div>
+                            <div class="user-avatar">
+                                <img src="/images/MM.png" alt="MM" class="avatar-img" id="mmAvatar">
+                                <span class="status-dot offline" id="mmStatus"></span>
+                                <span class="status-text" id="mmStatusText">离线</span>
+                                <div class="typing-container">
+                                    <div class="typing-indicator" id="mmTyping"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-section">
+                        <!-- 预留空间保持对称 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 消息区域模块 -->
+            <div class="message-module">
+                <div class="message-container">
+                    <div class="messages" id="messages"></div>
+                </div>
+            </div>
+
+            <!-- 输入模块 -->
+            <div class="input-module">
+                <div class="input-area">
+                    <div class="upload-buttons">
+                        <label for="imageUpload" class="upload-btn" title="上传图片">
+                            <i class="fas fa-image"></i>
+                            <input type="file" id="imageUpload" accept="image/*" hidden>
+                        </label>
+                        <label for="videoUpload" class="upload-btn" title="上传视频">
+                            <i class="fas fa-video"></i>
+                            <input type="file" id="videoUpload" accept="video/*" hidden>
+                        </label>
+                    </div>
+                    <input type="text" id="messageInput" placeholder="输入消息...">
+                    <button class="send-btn" onclick="sendMessage()" title="发送">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/client.js"></script>
+</body>
+</html> 
